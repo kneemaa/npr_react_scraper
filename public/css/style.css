@@ -1,0 +1,103 @@
+.banner {
+	top: 200px;
+    position: relative;
+    opacity: .25;
+}
+.saved-banner {
+ 	margin-left: 150px;
+}
+.home-banner {
+	margin-left: 100px;
+}
+.saved-articles, .home, .scrape {
+	background-color: grey;
+	color: white;
+	border: none;
+}
+.saved-articles:hover , .home:hover , .scrape:hover {
+	background-color: #b2b0b0;
+	color: black;
+}
+.deleteImg {
+	height: 20px;
+}
+.delete {
+	color: red;
+	display: flex;
+    width: 78px;
+}
+.delete:hover {
+	color: white;
+	background-color: red;
+}
+.note {
+	color: white;
+	background-color: black;
+	display: flex;
+    width: auto;
+}
+.note:hover {
+	color: black;
+	background-color: white;
+}
+.unsave {
+	color: red;
+	display: flex;
+    margin: 0 auto;
+    width: 78px;
+}
+.unsave:hover {
+	color: white;
+	background-color: red;
+}
+.save {
+	display: flex;
+    margin: 0 auto;
+    width: 125px;
+	color: blue;
+}
+.save:hover {
+	color: white;
+	background-color: blue;
+}
+.notes-group {
+	overflow-y: auto;
+	max-height: 200px;
+}
+.note-entry {
+	display: flex;
+	justify-content: space-between;
+}
+.navbar {
+	margin-bottom: 10px;
+}
+.card {
+	width: 18rem;
+}
+.card-title {
+	height: 72px;
+}
+.note-wrapper {
+	display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+.article-card {
+	display: inline-block;
+	margin: 5px;
+}
+.wrapper {
+	margin-left: 7%;
+}
+.button-group {
+	margin: 0 auto;
+}
+a {
+	color: black;
+}
+img {
+	height: 150px;
+}
+body {
+	background-color: #d4d6d6;
+}
