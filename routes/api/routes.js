@@ -9,7 +9,9 @@ const db = {
 	Notes: Notes,
 	Articles: Articles
 }*/
-
+/*router.route('/')
+	.get(postController.findAll)
+	.post()*/
 router.get('/', (req,res) => {
 	db.Articles.find({}).sort({date: -1}).then(articles => {
 		res.render('index', {articles: articles})
@@ -39,6 +41,8 @@ router.post('/api/article/add', (req,res) => {
 		})
 })
 
+router.route('/api/article/delete')
+	.
 router.post('/api/article/delete', (req,res) => {
 	let id = req.body.id
 

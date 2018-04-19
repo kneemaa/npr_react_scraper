@@ -4,7 +4,13 @@
   "description": "Practice for webscraping",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node server.js",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "node scripts/build.js",
+    "seed": "node scripts/seedDB.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installDeps": "yarn && cd client && yarn"
   },
   "repository": {
     "type": "git",
@@ -25,10 +31,7 @@
     "body-parser": "^1.18.2",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.3",
-    "express-handlebars": "^3.0.0",
     "mongoose": "^5.0.12",
-    "morgan": "^1.9.0",
-    "request": "^2.85.0",
-    "request-promise": "^4.2.2"
+    "morgan": "^1.9.0"
   }
 }
