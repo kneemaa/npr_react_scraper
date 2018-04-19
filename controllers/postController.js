@@ -2,7 +2,6 @@ const db = require("../models")
 const scraper = require("../scraper.js")
 
 module.exports = {
-
 	findAll: function(req,res) {
 		db.Articles.find({}).sort({date: -1}).then(articles => {
 			res.render('index', {articles: articles})
