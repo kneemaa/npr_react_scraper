@@ -14,7 +14,7 @@ export default {
 		return axios.post('/api/article/delete/' + id)
 	},
 	getSavedArticle: function() {
-		return axios.get('/saved')
+		return axios.get('/api/getSaved')
 	},
 	addNote: function(id) {
 		return axios.post('/api/note/add/'+ id)

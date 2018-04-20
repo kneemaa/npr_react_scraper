@@ -16,7 +16,6 @@ class Home extends Component {
 			.then(res => 
 				this.setState({posts: res.data})
 			)
-			.then(console.log(this.state))
 			.catch(err => console.log(err))
 	};
 
@@ -26,10 +25,16 @@ class Home extends Component {
 			.catch(err => console.log(err))
 	};
 
+	unsaveArticle = (id) => {
+		API.unsaveArticle(id)
+			.then(res => console.log(res))
+			.catch(err => console.log(err))
+	}
+
 	render() {
 		return (
 			<div className='wrapper'>
-				{this.state.posts ? (
+				{this.state.posts.length ? (
 					<div className='all-articles'>
 						{this.state.posts.map(post => (
 							<ArticleCard
@@ -38,7 +43,9 @@ class Home extends Component {
 								title={post.title}
 								id={post._id}
 								href={post.url}
-								saved={post.saved}
+								isSaved={post.saved}
+								save={this.saveArticle}
+								unsave={this.unsaveArticle}
 							/>
 						))}
 					</div>
