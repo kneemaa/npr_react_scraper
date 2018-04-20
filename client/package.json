@@ -1,5 +1,5 @@
 {
-  "name": "Imgur-React-Scraper",
+  "name": "npr_react_scraper",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001/",

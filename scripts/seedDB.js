@@ -3,13 +3,13 @@ const db = require('../models')
 mongoose.Promise = global.Promise
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/imgurdb",
+  process.env.MONGODB_URI || "mongodb://localhost/nprdb",
   {
     useMongoClient: true
   }
 )
 
-const imgurSeed = [
+const nprSeed = [
 	{
 		title: 'title',
 		image: 'image',
@@ -25,7 +25,7 @@ const imgurSeed = [
 ]
 
 db.Article.remove({})
-		.then(() => db.Article.collection.insertMany(imgurSeed))
+		.then(() => db.Article.collection.insertMany(nprSeed))
 		.then(data => {
 			console.log(data.insertedIds.length + " records inserted")
 			process.exit(0)

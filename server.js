@@ -6,7 +6,7 @@ const mongoose = require("mongoose")
 const routes = require('./routes')
 const PORT = process.env.PORT || 3001
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/imgurdb"
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nprdb"
 mongoose.Promise = Promise
 
 app.use(logger('dev'))
