@@ -2,24 +2,24 @@ import axios from 'axios'
 
 export default {
 	findAll: function() {
-		return axios.get('/')
+		return axios.get('/api/getAll')
 	},
 	scrape: function() {
 		return axios.get('/api/scrape')
 	},
-	saveArticle: function() {
-		return axios.post('/api/article/add')
+	saveArticle: function(id) {
+		return axios.post('/api/article/add/' + id)
 	},
-	unsaveArticle: function() {
-		return axios.post('/api/article/delete')
+	unsaveArticle: function(id) {
+		return axios.post('/api/article/delete/' + id)
 	},
 	getSavedArticle: function() {
 		return axios.get('/saved')
 	},
-	addNote: function() {
-		return axios.post('/api/note/add/:id')
+	addNote: function(id) {
+		return axios.post('/api/note/add/'+ id)
 	},
-	removeNote: function() {
-		return axios.post('/api/note/delete/:id')
+	removeNote: function(id) {
+		return axios.post('/api/note/delete/'+ id)
 	}
 }

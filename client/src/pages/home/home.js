@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import API from '../../utils/API'
+import ArticleCard from '../../components/ArticleCard'
 
 class Home extends Component {
 	state = {
@@ -19,23 +20,26 @@ class Home extends Component {
 			.catch(err => console.log(err))
 	};
 
+	saveArticle = (id) => {
+		API.saveArticle(id)
+			.then(res => console.log(res))
+			.catch(err => console.log(err))
+	};
+
 	render() {
 		return (
 			<div className='wrapper'>
 				{this.state.posts ? (
 					<div className='all-articles'>
 						{this.state.posts.map(post => (
-							<div key={post._id} className="card article-card">
-								<img src={post.image} alt="" className="card-img-top"></img>
-								<div className="card-body">
-									<a href={post.url}><p className="card-title">{post.title}</p></a>
-									{post.saved ? (
-									<a href="" id={post._id} className="unsave btn">Unsave</a>
-									) : (
-									<a href="" id={post._id} className="save btn">Save for Later</a>
-									)}
-								</div>
-							</div>
+							<ArticleCard
+								key={post._id}
+								src={post.image}
+								title={post.title}
+								id={post._id}
+								href={post.url}
+								saved={post.saved}
+							/>
 						))}
 					</div>
 				) : (
