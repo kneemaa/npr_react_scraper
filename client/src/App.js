@@ -5,6 +5,10 @@ import Home from './pages/home'
 import Saved from './pages/saved'
 import './style.css'
 
+const NotFound = () => {
+	return (<div> 404 not found </div>)
+}
+
 const App = () => (
 	<Router>
 		<div>
@@ -12,6 +16,8 @@ const App = () => (
 			<Switch>
 				<Route exact path="/" component={Home} />
 				<Route exact path="/saved" component={Saved} />
+				<Route exact path="/scrape" component={Home} />
+				<Route path='/' component={NotFound}/>
 			</Switch>
 		</div>
 	</Router>

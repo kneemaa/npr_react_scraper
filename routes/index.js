@@ -1,11 +1,20 @@
-const path = require('path')
-const router = require('express').Router();
-const apiRoutes = require('./api')
+const router = require('express').Router()
+const postController = require('../controllers/postController.js')
 
-router.use('/api', apiRoutes)
 
-router.use(function(req,res) {
-	res.sendFile(path.join(__dirname, '../client/build/index.html'))
-})
+router.route('/api/getAll').get(postController.findAll)
+
+router.route('/api/scrape').get(postController.scrape)
+
+router.route('/api/article/add').post(postController.saveArticle)
+
+router.route('/api/article/delete').post(postController.unsaveArticle)
+
+router.route('/saved').get(postController.getSavedArticles)
+
+router.route('/api/note/add/:id').post(postController.addNote)
+
+router.route('/api/note/delete/:id').post(postController.removeNote)
+
 
 module.exports = router

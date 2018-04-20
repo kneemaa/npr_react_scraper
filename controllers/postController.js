@@ -3,20 +3,17 @@ const scraper = require("../scraper.js")
 
 module.exports = {
 	findAll: function(req,res) {
-		db.Articles.find({}).sort({date: -1}).then(articles => {
-			res.render('index', {articles: articles})
-		}).catch(err => {
-			console.log(err)
-			res.render('index')
-		})
+		db.Articles.find({})
+			.sort({date: -1})
+			.then(articles => res.json(articles))
+			.catch(err => res.status(422).json(err))
 	},
 	scrape: function(req,res) {
 		scraper()
 		db.Articles.find({}).sort({date: -1}).then(articles => {
-			res.render('index', {articles: articles})
+			res.json(articles)
 		}).catch(err => {
 			console.log(err)
-			res.render('index')
 		})
 	},
 	saveArticle: function(req,res) {
@@ -39,9 +36,9 @@ module.exports = {
 	},
 	getSavedArticles: function(req,res) {
 		db.Articles.find({saved: true}).populate('notes').then(articles => {
-			res.render('saved', {articles: articles})
+			res.json(articles)
 		}).catch(err => {
-			res.render('saved')
+			console.log(err)
 		})
 	},
 	addNote: function(req,res) {
@@ -52,9 +49,9 @@ module.exports = {
 			return db.Articles.findOneAndUpdate({ _id: req.params.id}, {$push: {notes: notes._id}}, {new: true})
 		}).then( (req,res) => {
 			db.Articles.find({saved: true}).populate('notes').then(articles => {
-				res.render('saved', {articles: articles})
+				res.json(articles)
 			}).catch(err => {
-				res.render('saved')
+				console.log(err)
 			})
 		})
 		.catch(err => {
@@ -68,9 +65,9 @@ module.exports = {
 		})
 
 		db.Articles.find({saved: true}).populate('notes').then(articles => {
-			res.render('saved', {articles: articles})
+			res.json(articles)
 		}).catch(err => {
-			res.render('saved')
+			console.log(err)
 		})
 	}
 }
