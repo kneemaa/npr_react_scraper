@@ -6,7 +6,7 @@ class Navbar extends Component {
 
 	doScrape = () => {
 		API.scrape()
-			.then(res => res.json(res.data))
+			.then(res => console.log(res))
 			.catch(err => console.log(err))
 	}
 

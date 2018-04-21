@@ -1,18 +1,46 @@
 import React, { Component } from 'react'
 import API from '../../utils/API'
-import Modal from '../../components/modal'
+import ModalTwo from '../../components/modal'
 
-class Saved extends Component {
+class Saved extends React.Component {
 
-	state = {
-		posts: [],
-		saved: [],
-	};
+
+	constructor(props) {
+		super()
+	    //this.handleShow = this.handleShow.bind(this);
+	    this.handleClose = this.handleClose.bind(this);
+
+	    this.state = {
+		    	show: false,
+				saved: [],
+			};
+	}
+
+	handleClose() {
+		this.setState({ show: false });
+	}
+
+	handleShow = () => {
+		this.setState({ show: true });
+	}
 
 	componentWillMount() {
 		this.getSaved()
 	};
 
+	openModal = (event) => {
+		let postId = event.target.id
+		let post = this.state.saved.filter(post => post._id === postId)
+		//console.log(post[0].title)
+		this.setState({
+			modalTitle: post[0].title,
+			modalUrl: post[0].url,
+			modalId: post[0]._id,
+			modalNotes: post[0].notes,
+			})
+		//console.log(this.state)
+		this.handleShow()
+	}
 	getSaved = async () => {
 		try {
 			const savedArticles = await API.getSavedArticle()
@@ -35,14 +63,10 @@ class Saved extends Component {
 									<p className="card-title">{post.title}</p>
 								</a>
 								<span className="note-wrapper">
-									<a href="" id={post._id} onClick={() => API.unsaveArticle(post._id)} className="delete btn">Delete</a>
-									<a href="" id={post._id} className="note btn">{post.notes.length} Notes</a>
+									<button type="button" className="delete btn" onClick={ () =>  API.unsaveArticle(post._id)}>Delete</button>
+									<button type="button" className="note btn" onClick={this.openModal} id={post._id}>{post.notes.length} Notes</button>
 								</span>
 							</div>
-						<Modal
-							key={post._id}
-							postInfo={post}
-						/>
 						</div>
 					)
 				})
@@ -52,6 +76,14 @@ class Saved extends Component {
 				</div>
 			)
 			}
+			<ModalTwo
+				show={this.state.show}
+				handleClose={this.handleClose}
+				title={this.state.modalTitle}
+				url={this.state.modalUrl}
+				id={this.state.modalId}
+				notes={this.state.modalNotes}
+			/>
 		</div>
 			)
 	}

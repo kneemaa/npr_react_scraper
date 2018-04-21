@@ -21,17 +21,18 @@ class Home extends Component {
 
 	saveArticle = (id) => {
 		API.saveArticle(id)
-			.then(res => console.log(res))
+			.then(res => this.loadArticles())
 			.catch(err => console.log(err))
 	};
 
 	unsaveArticle = (id) => {
 		API.unsaveArticle(id)
-			.then(res => console.log(res))
+			.then(res => this.loadArticles())
 			.catch(err => console.log(err))
 	}
 
 	render() {
+		//console.log(this.state)
 		return (
 			<div className='wrapper'>
 				{this.state.posts.length ? (

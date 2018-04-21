@@ -101,3 +101,10 @@ img {
 body {
 	background-color: #d4d6d6;
 }
+
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}

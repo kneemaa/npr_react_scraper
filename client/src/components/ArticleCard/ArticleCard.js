@@ -7,9 +7,9 @@ const ArticleCard = props => {
 			<div className="card-body">
 				<a href={props.href}><p className="card-title">{props.title}</p></a>
 				{props.isSaved ? (
-				<a href="" id={props.id} onClick={() => props.unsave(props.id)} className="unsave btn">Unsave</a>
+				<button onClick={() => props.unsave(props.id)} className="unsave btn">Unsave</button>
 				) : (
-				<a href="" id={props.id} onClick={() => props.save(props.id)} className="save btn">Save for Later</a>
+				<button onClick={() => props.save(props.id)} className="save btn">Save for Later</button>
 				)}
 			</div>
 		</div>
