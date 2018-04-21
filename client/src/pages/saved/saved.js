@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import API from '../../utils/API'
+import Modal from '../../components/modal'
 
 class Saved extends Component {
 
@@ -12,12 +13,6 @@ class Saved extends Component {
 		this.getSaved()
 	};
 
-/*	setStateAsync(state) {
-		return new Promise((resolve) => {
-			this.setState(state, resolve)
-		})
-	}*/
-
 	getSaved = async () => {
 		try {
 			const savedArticles = await API.getSavedArticle()
@@ -25,24 +20,31 @@ class Saved extends Component {
 		} catch (err) {
 			console.log(err)
 		}
-		console.log(this.state.saved.length)
 	}
 
 	render () {
 		return (
 			<div className="container">
-			{this.state.saved.length > 0 ? (
+			{this.state.saved.length ? (
 				this.state.saved.map(post => {
 					return (
 						<div key={post._id} className="card article-card">
 							<img src={post.image} alt="" className="card-img-top"></img>
 							<div className="card-body">
-								<a href={post.url} target="_blank"><p className="card-title">{post.title}</p></a>
-								<span className="note-wrapper"><a href="" id={post._id} className="delete btn">Delete</a>
-								<a href="" id={post._id} class="note btn">{this.post.notes.length < 0 ? this.post.notes.length : 0} Notes</a></span>
+								<a href={post.url} target="_blank">
+									<p className="card-title">{post.title}</p>
+								</a>
+								<span className="note-wrapper">
+									<a href="" id={post._id} onClick={() => API.unsaveArticle(post._id)} className="delete btn">Delete</a>
+									<a href="" id={post._id} className="note btn">{post.notes.length} Notes</a>
+								</span>
 							</div>
+						<Modal
+							key={post._id}
+							postInfo={post}
+						/>
 						</div>
-					/*	{{>modal}}*/)
+					)
 				})
 			) : (
 				<div className="banner saved-banner">
