@@ -1,59 +1,74 @@
 import React, { Component } from 'react'
+import { Modal } from 'react-bootstrap'
+import { FormBtn, TextArea } from '../Form'
+import API from '../../utils/API'
+import './modal.css'
+import DeleteImg from '../../images/delete.png'
 
+class NotesModal extends Component {
+	
+	state = {}
 
-class Modal extends Component {
+	componentWillReceiveProps(props) {
+		this.props = props
+	}
+	handleInputChange = event => {
+		const { name, value } = event.target
+		this.setState({
+			[name]: value
+		})
+	}
 
-	constructor(props) {
-	    super(props);
+	handleFormSubmit = event => {
+		event.preventDefault()
+		if (this.state.note) {
+			return API.addNote(this.props.id,this.state.note)
+		}
+		this.props.refresh()
+	}
 
-	    this.state = {
-		    	modal: props.postInfo
-			};
+	deleteNote = id => {
+		
+		API.removeNote(id)
+		return this.props.refresh()
 	}
 
 	render() {
-		const modal = this.state.modal
-		console.log(this.state)
-		return (
-		<div className="modal modal-{modal._id}" tabIndex="-1" role="dialog">
-			  <div className="modal-dialog" role="document">
-			    <div className="modal-content">
-			      <div className="modal-header">
-			        <h5 className="modal-title">{modal.title}</h5>
-			      </div>
-			      <div className="modal-body">
-			        <div className="form-group">
-					  <div className="notes-group">
-					  {modal.notes.length < 0 ? (
-					  	modal.notes.map(note => {
-					  		return (
-					  			<p className="note-entry note-{modal._id}">{modal.body}
-	  						  		<span className="note-entry" aria-hidden="true">
-	  						  			<a href="" id={modal._id} className="delete-note">
-	  						  				<img className="deleteImg" alt="trashcan icon" src="./images/delete.png"></img>
-	  					  				</a>
-	  				  				</span>
-	  			  				</p>
-	  			  				)
-					  		}
-					  	)
-					  ) : (
-					  	<div>
-					  		<h1>No Notes</h1>
-					  	</div>
-					  )}
-					  </div>
-					  <textarea className="note-{{_id}} form-control" id={modal._id} rows="3"></textarea>
-					</div>
-			      </div>
-			      <div className="modal-footer">
-			        <button type="button" id={modal._id} className="save-note btn btn-primary">Save Note</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>)
+		console.log(this.props.refresh)
+			return (
+				<div>
+		        <Modal show={this.props.show} onHide={this.props.handleClose}>
+		          <Modal.Header>
+		            <Modal.Title>{this.props.title}</Modal.Title>
+		          </Modal.Header>
+		          <Modal.Body>
+		            {this.props.notes ? (
+		            	this.props.notes.map(note => {
+		            		return <div key={note._id}>
+		            			<span>{note.body}</span><img onClick={() => this.deleteNote(note._id)} className='deleteImg' src={DeleteImg} alt='Trash Can'></img>
+		            		</div>}
+		            	)
+		            	) : (
+		            		<div>No NotesModal</div>
+		            	)}
+		            	<hr/>
+		            	<TextArea
+		            		value={this.state.note}
+		            		name='note'
+		            		onChange={this.handleInputChange}
+		            		placeholder="Enter your notes here..."
+		            	/>
+		            	<FormBtn
+		            		disabled={!this.state.note}
+		            		onClick={this.handleFormSubmit}
+		            	/>
+
+		          </Modal.Body>
+		        </Modal>
+		      </div>
+		    )
 		}
-	
 }
 
-export default Modal
+
+export default NotesModal

@@ -16,8 +16,8 @@ export default {
 	getSavedArticle: function() {
 		return axios.get('/api/getSaved')
 	},
-	addNote: function(id) {
-		return axios.post('/api/note/add/'+ id)
+	addNote: function(id,note) {
+		return axios.post(`/api/note/add/${id}/${note}`)
 	},
 	removeNote: function(id) {
 		return axios.post('/api/note/delete/'+ id)

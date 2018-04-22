@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import API from '../../utils/API'
 import ModalTwo from '../../components/modal'
 
-class Saved extends React.Component {
+class Saved extends Component {
 
 
 	constructor(props) {
 		super()
 	    //this.handleShow = this.handleShow.bind(this);
 	    this.handleClose = this.handleClose.bind(this);
-
+	    this.getSaved = this.getSaved.bind(this)
 	    this.state = {
 		    	show: false,
 				saved: [],
@@ -63,7 +63,7 @@ class Saved extends React.Component {
 									<p className="card-title">{post.title}</p>
 								</a>
 								<span className="note-wrapper">
-									<button type="button" className="delete btn" onClick={ () =>  API.unsaveArticle(post._id)}>Delete</button>
+									<button type="button" className="delete btn" onClick={() =>  API.unsaveArticle(post._id)}>Delete</button>
 									<button type="button" className="note btn" onClick={this.openModal} id={post._id}>{post.notes.length} Notes</button>
 								</span>
 							</div>
@@ -77,6 +77,7 @@ class Saved extends React.Component {
 			)
 			}
 			<ModalTwo
+				refresh={this.getSaved}
 				show={this.state.show}
 				handleClose={this.handleClose}
 				title={this.state.modalTitle}

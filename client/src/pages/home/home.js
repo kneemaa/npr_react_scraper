@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import API from '../../utils/API'
 import ArticleCard from '../../components/ArticleCard'
+import './home.css'
 
 class Home extends Component {
 	state = {
@@ -17,22 +18,24 @@ class Home extends Component {
 				this.setState({posts: res.data})
 			)
 			.catch(err => console.log(err))
+
 	};
 
 	saveArticle = (id) => {
 		API.saveArticle(id)
 			.then(res => this.loadArticles())
 			.catch(err => console.log(err))
+		this.loadArticles()
 	};
 
 	unsaveArticle = (id) => {
 		API.unsaveArticle(id)
 			.then(res => this.loadArticles())
 			.catch(err => console.log(err))
+		this.loadArticles()
 	}
 
 	render() {
-		//console.log(this.state)
 		return (
 			<div className='wrapper'>
 				{this.state.posts.length ? (

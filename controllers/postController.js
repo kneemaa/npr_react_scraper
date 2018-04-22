@@ -33,7 +33,7 @@ module.exports = {
 			.catch(err => res.status(422).json(err))
 	},
 	addNote: function(req,res) {
-		db.Notes.create({ body: req.body.note})
+		db.Notes.create({ body: req.params.note})
 			.then(notes => {return db.Articles.findOneAndUpdate({ _id: req.params.id}, {$push: {notes: notes._id}}, {new: true})})
 			.then( (req,res) => { db.Articles.find({saved: true})
 				.populate('notes')

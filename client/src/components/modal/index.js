@@ -1,1 +1,1 @@
-export { default } from './modalTwo'
+export { default } from './modal'

@@ -12,7 +12,7 @@ router.route('/api/article/delete/:id').post(postController.unsaveArticle)
 
 router.route('/api/getSaved').get(postController.getSavedArticles)
 
-router.route('/api/note/add/:id').post(postController.addNote)
+router.route('/api/note/add/:id/:note').post(postController.addNote)
 
 router.route('/api/note/delete/:id').post(postController.removeNote)
 
