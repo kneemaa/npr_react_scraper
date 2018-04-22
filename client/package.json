@@ -10,6 +10,7 @@
     "react-router-dom": "^4.1.2",
     "axios": "^0.16.2"
   },
+  "homepage" :"https://tranquil-savannah-15402.herokuapp.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
